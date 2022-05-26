@@ -16,6 +16,7 @@
   ## Usage
 
   You will type "node index" in the terminal and answer all questions that you are prompted with. The application does the rest!
+  <br>
   Link to video demonstration: https://drive.google.com/file/d/1NG2uXwANCoPNctodvnGow_K6Bnzqp3Nc/view
 
   ## License
