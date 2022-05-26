@@ -32,7 +32,7 @@ function init () {
         case "Add an employee":
           newEmployee();
           break;
-        case "Update an employee":
+        case "Update an employee role":
           updateEmpRole();
           break;
       }
@@ -51,6 +51,7 @@ function newDept() {
         if (error) {
           throw error;
         } else {
+          console.log('New department added.');
           runItBack();
         }
       });
@@ -66,6 +67,7 @@ function newRole() {
         if (error) {
           throw error;
         } else {
+          console.log('New role added.');
           runItBack();
         }
       });
@@ -81,6 +83,7 @@ function newEmployee() {
           if (error) {
             throw error;
           } else {
+            console.log('New employee added.');
             runItBack();
           }
         });
@@ -129,24 +132,31 @@ function viewEmployees() {
   )
 }
 
+function updateEmpRole() {
+  inquirer.prompt(updateRole)
+    .then((body) => {
+      db.query(
+        'UPDATE employees SET role_id = ? WHERE id = ?',
+        [body.roleID, body.employeeID], (error, result) => {
+          if (error) {
+            throw error;
+          } else {
+            runItBack();
+          }
+      });
+    });
+}
+
 function runItBack() {
   inquirer.prompt(newTask)
     .then((body) => {
       if (body.confirm) {
         init();
       } else {
+        console.log('See you next time.');
         return;
       }
     });
 }
 
 init();
-
-// simple query
-// db.query(
-//   'SELECT * FROM `table` WHERE `name` = "Page" AND `age` > 45',
-//   function(err, results, fields) {
-//     console.log(results); // results contains rows returned by server
-//     console.log(fields); // fields contains extra meta data about results, if available
-//   }
-// );
